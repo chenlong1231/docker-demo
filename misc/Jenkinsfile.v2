@@ -9,6 +9,8 @@ node {
      def myTestContainer = docker.image('node:4.6')
      myTestContainer.pull()
      myTestContainer.inside {
+       sh 'export HTTP_PROXY=http://www-proxy.ao.ericsson.se:8080'
+       sh 'export HTTPS_PROXY=http://www-proxy.ao.ericsson.se:8080'
        sh 'npm install --only=dev'
        sh 'npm test'
      }
@@ -18,6 +20,8 @@ node {
      def myTestContainer = docker.image('node:4.6')
      myTestContainer.pull()
      myTestContainer.inside("--link ${mysql.id}:mysql") { // using linking, mysql will be available at host: mysql, port: 3306
+          sh 'export HTTP_PROXY=http://www-proxy.ao.ericsson.se:8080'
+          sh 'export HTTPS_PROXY=http://www-proxy.ao.ericsson.se:8080'
           sh 'npm install --only=dev' 
           sh 'npm test'                     
      }                                   
