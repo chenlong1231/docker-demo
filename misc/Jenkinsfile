@@ -7,8 +7,8 @@ node {
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
-       sh 'ENV HTTP_PROXY http://www-proxy.ao.ericsson.se:8080'
-       sh 'ENV HTTPS_PROXY http://www-proxy.ao.ericsson.se:8080'
+       sh 'HTTP_PROXY=http://www-proxy.ao.ericsson.se:8080'
+       sh 'HTTPS_PROXY=http://www-proxy.ao.ericsson.se:8080'
        sh 'npm install --only=dev'
        sh 'npm test'
      }
